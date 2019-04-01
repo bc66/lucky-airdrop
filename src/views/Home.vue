@@ -17,20 +17,23 @@
         <div class="container-fluid page-home">
           <div class="container-fluid envelope-container">
             <div class="envelope--content page-home--intro">
-              <svg class="page-home--icon" viewBox="0 0 300 300">
+              <svg id="envelope-home" data-name="Layer 1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" viewBox="0 0 300 300">
                 <defs>
-                  <linearGradient id="envelopeGradient" x1="72.26" y1="72.8" x2="72.26" y2="168.6" gradientTransform="translate(-29.32 75.52) rotate(-45)" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#f85947"></stop>
-                    <stop offset="0.34" stop-color="#f45645"></stop>
-                    <stop offset="0.64" stop-color="#ea4e41"></stop>
-                    <stop offset="0.92" stop-color="#d84039"></stop>
-                    <stop offset="1" stop-color="#d13b36"></stop>
-                  </linearGradient>
+                    <linearGradient id="linear-gradient" x1="72.26" y1="72.8" x2="72.26" y2="168.6"
+                        gradientTransform="translate(-29.32 75.52) rotate(-45)" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#f85947" />
+                        <stop offset="0.34" stop-color="#f45645" />
+                        <stop offset="0.64" stop-color="#ea4e41" />
+                        <stop offset="0.92" stop-color="#d84039" />
+                        <stop offset="1" stop-color="#d13b36" />
+                    </linearGradient>
                 </defs>
-                <rect fill="#F85947" x="54" y="44" width="187" height="212.32" rx="6.9" ry="6.9" transform="translate(-62.98 148.28) rotate(-45)"></rect>
-                <path fill="url(#envelopeGradient)" class="cls-2" d="M180.69,51.12,144.25,14.67a6.92,6.92,0,0,0-9.76,0L12,137.14a6.92,6.92,0,0,0,0,9.76l35.84,35.84,92.73-38.69Z"></path>
-                <circle fill="#FBB03B" cx="140.5" cy="143.5" r="26.5"></circle>
-              </svg>
+                <rect class="cls-1" x="54" y="44" width="187" height="212.32" rx="6.9" ry="6.9"
+                    transform="translate(-62.98 148.28) rotate(-45)" />
+                <path class="cls-2"
+                    d="M180.69,51.12,144.25,14.67a6.92,6.92,0,0,0-9.76,0L12,137.14a6.92,6.92,0,0,0,0,9.76l35.84,35.84,92.73-38.69Z" />
+                <circle class="cls-3" cx="140.5" cy="143.5" r="26.5" />
+            </svg>
               <h2>
                 <div>
                   <h1>Send and receive lucky airdrop.</h1>
