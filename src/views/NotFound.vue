@@ -18,7 +18,7 @@
           <p>If you were trying to claim an envelope, please check you entered the correct URL.</p>
         </span>
         <p class="error-page--buttons">
-          <a class="btn btn-create" href="/create">Create an Envelope</a>
+          <a class="btn btn-create" href="/create">Create an Red Envelope</a>
         </p>
       </div>
     </div>
