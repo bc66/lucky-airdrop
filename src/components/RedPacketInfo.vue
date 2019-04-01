@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid envelope-container envelope-container--claim">
     <div v-if="hasErr" class="alert envelope-alert">
-        <b>{{ errMsg }}</b>
-      </div>
+      <b>{{ errMsg }}</b>
+    </div>
 
     <div class="container-fluid envelope-info">
       <div class="row envelope-info--top">

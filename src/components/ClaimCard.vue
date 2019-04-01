@@ -48,14 +48,14 @@
 
 
 <script>
+import BN from 'bignumber.js'
 import IPFS from 'ipfs-mini'
 import AfterClaimCard from "@/components/AfterClaimCard.vue";
-
 import { cry, abi, RLP, Transaction } from 'thor-devkit'
 
+const GAS_PER_CLAIMER = 200000
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
-const GAS_PER_CLAIMER = 200000
 
 export default {
     name: 'ClaimCard',
@@ -108,8 +108,7 @@ export default {
 
         this.cTicker = setInterval(this.refreshCounter, 1000)
 
-        fetch(this.$config.providerUrl + '/blocks/best')
-        .then(resp => resp.json())
+        fetch(this.$config.providerUrl + '/blocks/best').then(resp => resp.json())
         .then(block => {
           let blockRef = block.id.slice(0, 18)
 
@@ -136,7 +135,21 @@ export default {
           })
           .then(response => response.json())
           .then(tx => {
-            this.getReceipt(tx.id)
+            this.getReceipt(tx.id, (err, receipt) => {
+              if (err) return
+              this.isClaiming = false
+
+              if (receipt.reverted) {
+                
+              } else {
+                this.claimed = true
+                let events = receipt.outputs[0].events
+                let claimAmount = events[events.length-1].data
+
+                this.$set(this.envelope, 'totalClaimers', this.envelope.totalClaimers + 1)
+                this.$set(this.envelope, 'claimed', (new BN(claimAmount, 16)).div(10**18).toFixed(2))
+              }
+            })
           })
          })
          .catch(err => {
@@ -145,26 +158,24 @@ export default {
          })
 
       },
-      getReceipt(txID) {
+      getReceipt(txID, cb) {
         let counter = 0
         let url = this.$config.providerUrl + `/transactions/${txID}/receipt`
 
         function _getReceipt() {
           counter++
+
           fetch(url).then(resp => resp.json())
-          .then(body => {
-            console.log(body)
+          .then(receipt => {
+            console.log(receipt)
 
-            if (body) {
-              this.isClaiming = false
-              if (body.reverted) {
-                // failure
-
-              } else {
-                location.reload()
-              }
-            } else if (counter < 7) {
+            if (receipt) {
+              return cb(null, receipt)
+            }
+            if (counter < 7) {
               setTimeout(_getReceipt, 10000)
+            } else {
+              return cb(new Error('fail to get receipt'), null)
             }
           })
         }
