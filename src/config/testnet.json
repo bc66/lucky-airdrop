@@ -1,0 +1,17 @@
+{
+    "pathPrefix": "/lucky-airdrop",
+    "network": "testnet",
+    "chainTag": "0x27",
+    "providerUrl": "https://vethor-node-test.digonchain.com",
+    "contract": "0x7d6dcd458ef0f587bf3e0f52549a96aa445224c1",
+    "accountBaseUrl": "https://testnet.veforge.com/accounts",
+    "txBaseUrl": "https://testnet.veforge.com/transactions",
+    "tokens": {
+        "VTHO": "0x0000000000000000000000000000456e65726779",
+        "OCE": "0x9652aead889e8df7b5717ed984f147c132f85a69",
+        "PLA": "0x645d2019ed39e58db76af602317d177b53ba8b9d",
+        "SHA": "0x9c6e62b3334294d70c8e410941f52d482557955b",
+        "DBET": "0x510fcddc9424b1bbb328a574f45bfddb130e1f03",
+        "TIC": "0x18081982d752ADd4f402AEAe480d6c90f7644427"
+    }
+}
