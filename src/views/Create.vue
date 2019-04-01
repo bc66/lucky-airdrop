@@ -140,7 +140,7 @@
               <div class='envelope--buttons'>
                 <div class='envelope--buttons-row'>
                   <div class='envelope--create-button'>&nbsp;</div>
-                  <button :disabled="isCreating" class='btn btn-env' @click='createEnvelope()'>{{isCreating ? 'Creating...' + counter : 'Craete'}}</button>
+                  <button :disabled="isCreating" class='btn btn-env' @click='createEnvelope()'>{{isCreating ? 'Creating...' + counter : 'Create'}}</button>
                 </div>
               </div>
 

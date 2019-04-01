@@ -44,7 +44,7 @@
                 </div>
               </div>
 
-              <div class="envelope--create-button--close"><button :disabled="!isAddress()" @click="handleClose"><h4>Close</h4></button></div>
+              <div class="envelope--create-button--close"><button :disabled="!isAddress()" @click="handleClose"><h4>Continue</h4></button></div>
             </div>
           </div>
         </div>
