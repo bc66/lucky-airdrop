@@ -44,7 +44,7 @@
 
       <div class="divider"><h4>-- In the past 5 hours --</h4></div>
 
-      <div v-if="claimHistories.length">
+      <div class="claim-history" v-if="claimHistories.length">
         <div class="row" v-for="ch in claimHistories" :key="ch._from">
           <div class="col-xs-8 left-align"><a target="_blank" :href="ch.txLink"><p>{{ch._from}}</p></a></div>
           <div class="col-xs-4 right-align"><p>{{ch._value}}</p></div>
@@ -223,5 +223,8 @@ export default {
     margin: 0 auto 2.4rem auto;
     text-align: center;
     color: #ec4331;
+}
+.claim-history p {
+    font-family: Menlo, Arial, sans-serif
 }
 </style>
