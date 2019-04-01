@@ -48,7 +48,6 @@
                         <option value='OCE'>OCE</option>
                         <option value='PLA'>PLA</option>
                         <option value='TIC'>TIC</option>
-                        <option value='SHA'>SHA</option>
                       </select>
                     </div>
                   </div>
