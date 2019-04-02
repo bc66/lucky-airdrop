@@ -162,6 +162,7 @@
 <script>
 import BN from 'bignumber.js'
 import Utils from '../utils'
+import { cry } from 'thor-devkit'
 import CertModal from '@/components/CertModal.vue'
 import ShareCard from '@/components/ShareCard.vue'
 import RedPacketInfo from '@/components/RedPacketInfo.vue'
@@ -187,15 +188,21 @@ export default {
       const signingService = connex.vendor.sign('cert')
 
       // Generate a random string and request the identification
+      let content = 'Confirm that you would like this site to access your account'
       signingService.request({
           purpose: 'identification',
           payload: {
               type: 'text',
-              content: 'Confirm that you would like this site to access your account'
+              content: content
           }
       }).then(result => {
           this.account = result.annex.signer
           this.accountLink = this.$config.accountBaseUrl + '/accounts' + this.account
+
+          let sig = Buffer.from(result.signature.slice(2), 'hex')
+          let signMsg = `{"domain":"${result.annex.domain}","payload":{"content":"${content}","type":"text"},"purpose":"identification","signer":"${result.annex.signer}","timestamp":${result.annex.timestamp}}`
+
+          this.accountPubK = cry.secp256k1.recover(cry.blake2b256(signMsg), sig)
 
           this.onTokenChange()
       })
@@ -217,6 +224,7 @@ export default {
       errors: [],
       isCreating: false,
       account: '',
+      accountPubK: '',
       accountLink: '',
       tokenName: 'VET',
       balance: '',
@@ -428,9 +436,10 @@ export default {
             console.log('Red Envelope Id:', envelopeId)
             
             this.envelope.id = parseInt(envelopeId)
-
             this.shareLink = window.location.origin + this.$config.pathPrefix + `/#/claim/${this.envelope.id}/${btoa(this.secretWallet.privateKey)}`
-            localStorage.setItem(`shareLink#${this.envelope.id}`, this.shareLink)
+
+            let encrypted = Utils.encrypt(this.accountPubK, this.shareLink)
+            localStorage.setItem(`shareLink#${this.envelope.id}`, encrypted.toString('hex'))
 
             this.created = true
           })
