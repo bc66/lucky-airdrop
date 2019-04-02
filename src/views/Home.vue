@@ -124,6 +124,10 @@ export default {
   }
 }
 
+.btn-create {
+  padding: 1rem 4rem;
+}
+
 .container-envelope {
   text-align: center;
   margin: auto;
