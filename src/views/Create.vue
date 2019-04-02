@@ -32,7 +32,7 @@
             </div>
 
             <!-- Create Form -->
-            <div class='container-fluid envelope-container envelope-container--create'>
+            <div v-if='!created' class='container-fluid envelope-container envelope-container--create'>
               <div class='envelope--title'>
                 <h4>Create Your Red Envelope</h4>
               </div>
@@ -147,6 +147,11 @@
               <div class="envelope--input--disclaimer"><p><span>You understand that you are using free software, provided under <a href="https://mit-license.org/" target="_blank">MIT License</a>, at your own risk.</span></p></div>
             </div>
 
+            <div v-else>
+              <ShareCard :shareLink='shareLink' />
+              <RedPacketInfo :visitor='envelope.creator' :tokenName='tokenName' :envelope='envelope' />
+            </div>
+
           </div>
         </div>
       </div>
@@ -158,6 +163,9 @@
 import BN from 'bignumber.js'
 import Utils from '../utils'
 import CertModal from '@/components/CertModal.vue'
+import ShareCard from '@/components/ShareCard.vue'
+import RedPacketInfo from '@/components/RedPacketInfo.vue'
+
 
 import IPFS from 'ipfs-mini'
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
@@ -169,6 +177,8 @@ export default {
   name: 'Create',
   components: {
     CertModal,
+    ShareCard,
+    RedPacketInfo,
   },
   beforeCreate() {
     if (!window.connex) {
@@ -307,6 +317,7 @@ export default {
       // 1. validate form
       if (!this.checkForm()) return
 
+      this.created = false
       this.isCreating = true
       this.envelope.initialBalance = this.calcAmountInEther().toString(10)
 
@@ -419,8 +430,9 @@ export default {
             this.envelope.id = parseInt(envelopeId)
 
             this.shareLink = window.location.origin + this.$config.pathPrefix + `/#/claim/${this.envelope.id}/${btoa(this.secretWallet.privateKey)}`
-            localStorage.setItem(`shareLink#${this.envelope.id}`, this.shareLink);
-            window.location.href = this.shareLink;
+            localStorage.setItem(`shareLink#${this.envelope.id}`, this.shareLink)
+
+            this.created = true
           })
         })
         .catch(err => {
