@@ -87,14 +87,13 @@ export default {
         this.envelope.message = message
       })
     }
+
+    this.getClaimHistories()
   },
   destroyed() {
     clearInterval(this.cTicker)
   },
   watch: {
-    'envelope.id': function (val, oldVal) {
-      this.getClaimHistories()
-    },
     'envelope.messageLink': function (val, oldVal) {
       if (this.envelope.messageLink) {
         ipfs.cat(val).then(message => {

@@ -44,7 +44,7 @@
                 </div>
               </div>
 
-              <div class="envelope--create-button--close"><button :disabled="!isAddress()" @click="handleClose"><h4>Continue</h4></button></div>
+              <div class="envelope--create-button--close"><button :disabled="!isAddress()" @click="handleContinue"><h4>Continue</h4></button></div>
             </div>
           </div>
         </div>
@@ -95,26 +95,33 @@ export default {
       accountLink: '',
       role: '',
       isCreator: false,
-      showInptModal: false,
+      hasConnex: false,
+      showInptModal: true,
       showCertModal: false,
-      hasConnex: true,
       tokenName: 'VET',
       envelope: {},
     }
   },
   created() {
     this.network = this.$config.network
+    let { packet_id, code } = this.$route.params
+    this.$set(this.envelope, 'id', packet_id)
 
     let spk
-    try { spk = atob(this.$route.params.code).slice(2) }
+    try { spk = atob(code).slice(2) }
     catch(err) {
       window.location.href = '#/404'
       return
     }
 
-    if (!window.connex) {
-      this.hasConnex = false
-      this.showInptModal = true
+    let address = localStorage.getItem(`claimed:${this.network}_${packet_id}`)
+    if (address && Utils.isAddress(address)) {
+      this.address = address
+    }
+    if (window.connex) {
+      this.hasConnex = true
+      this.showInptModal = false
+      this.showCertModal = true
     }
 
     this.getRevealInfo().then(() => {
@@ -126,10 +133,10 @@ export default {
         return
       }
       if (!window.connex) {
+        this.handleContinue()
         return
       }
       
-      this.showCertModal = true
       const signingService = connex.vendor.sign("cert")
 
       // Generate a random string and request the identification
@@ -142,12 +149,11 @@ export default {
           }
       })
       .then(result => {
-          this.visitor = result.annex.signer
           this.showCertModal = false
-          this.accountLink = this.$config.accountBaseUrl + '/accounts' + this.visitor
+          this.setAccount(result.annex.signer)
 
           return this.getPacketInfo().then(() => {
-            return this.checkUserRole()
+            return this.setUserRole()
           })
       })
     })
@@ -156,41 +162,36 @@ export default {
     isAddress() {
       return Utils.isAddress(this.address);
     },
-    handleClose() {
+    setAccount(address) {
+      this.visitor = address
+      this.accountLink = this.$config.accountBaseUrl + '/accounts' + this.visitor
+    },
+    handleContinue() {
       if (this.isAddress()) {
-        this.visitor = this.address
         this.showInptModal = false
-        this.accountLink = this.$config.accountBaseUrl + '/accounts' + this.visitor
+        this.setAccount(this.address)
 
         this.getPacketInfo().then(() => {
-          return this.checkUserRole()
+          return this.setUserRole()
         })
       }
     },
-    checkUserRole() {
-      if (this.envelope.id) {
-        this.role = this.envelope.creator.toLowerCase() == this.visitor.toLowerCase() ? 'creator' : 'claimer'
-      } else {
-        this.getPacketInfo().then(() => {
-          this.role = this.envelope.creator.toLowerCase() == this.visitor.toLowerCase() ? 'creator' : 'claimer'
-        })
-      }
+    setUserRole() {
+      this.role = this.envelope.creator.toLowerCase() == this.visitor.toLowerCase() ? 'creator' : 'claimer'
     },
     getPacketInfo() {
       let vm = this
-      let packetId = vm.$route.params.packet_id
 
       let getEnvelopeInfoABI = {"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getEnvelopeInfo","outputs":[{"name":"","type":"uint8"},{"name":"","type":"uint8"},{"name":"","type":"address"},{"name":"","type":"string"},{"name":"","type":"uint64"},{"name":"","type":"string"},{"name":"","type":"uint64"}],"payable":false,"stateMutability":"view","type":"function"}
       let getClaimInfoABI = {"constant":true,"inputs":[{"name":"_id","type":"uint256"},{"name":"_claimer","type":"address"}],"name":"getClaimInfo","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
       return Promise.all([
-        this.callMethod(getEnvelopeInfoABI, [packetId]),
-        this.callMethod(getClaimInfoABI, [packetId, vm.visitor]),
+        this.callMethod(getEnvelopeInfoABI, [this.envelope.id]),
+        this.callMethod(getClaimInfoABI, [this.envelope.id, vm.visitor]),
       ])
       .then(([info, claiminfo]) => {
         let ts = parseInt((+new Date()) / 1000)
 
-        this.$set(vm.envelope, 'id', packetId)
         this.$set(vm.envelope, 'type', info[0])
         this.$set(vm.envelope, 'status', info[1])
         this.$set(vm.envelope, 'creator', info[2])
@@ -205,10 +206,9 @@ export default {
       })
     },
     getRevealInfo() {
-      let packetId = this.$route.params.packet_id
       let getEnvelopeRevealABI = {"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getEnvelopeReveal","outputs":[{"name":"","type":"address"},{"name":"","type":"uint64"},{"name":"","type":"uint64"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}
 
-      return this.callMethod(getEnvelopeRevealABI, [packetId]).then(reveal => {
+      return this.callMethod(getEnvelopeRevealABI, [this.envelope.id]).then(reveal => {
 
         this.$set(this.envelope, 'tokenAddress', reveal[0])
         this.$set(this.envelope, 'claimers', parseInt(reveal[1]))
@@ -231,7 +231,6 @@ export default {
       })
       return tokenName
     },
-
     callMethod(_abi, _values) {
       let fn = new abi.Function(_abi)
       let data = fn.encode(..._values)

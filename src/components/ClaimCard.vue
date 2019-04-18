@@ -140,7 +140,8 @@ export default {
               this.isClaiming = false
 
               if (receipt.reverted) {
-                
+                //
+                console.error(`claim tx failed: TxId=${tx.id}`)
               } else {
                 this.claimed = true
                 let events = receipt.outputs[0].events
@@ -148,6 +149,9 @@ export default {
 
                 this.$set(this.envelope, 'totalClaimers', this.envelope.totalClaimers + 1)
                 this.$set(this.envelope, 'claimed', (new BN(claimAmount, 16)).div(10**18).toFixed(2))
+
+                // 
+                localStorage.setItem(`claimed:${this.$config.network}_${this.envelope.id}`, this.visitor)
               }
             })
           })
