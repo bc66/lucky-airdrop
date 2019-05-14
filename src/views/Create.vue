@@ -138,10 +138,7 @@
               </div>
 
               <div class='envelope--buttons'>
-                <div class='envelope--buttons-row'>
-                  <div class='envelope--create-button'>&nbsp;</div>
-                  <button :disabled="isCreating" class='btn btn-env' @click='createEnvelope()'>{{isCreating ? 'Creating...' + counter : 'Create'}}</button>
-                </div>
+                <button :disabled="isCreating" class='btn btn-create' @click='createEnvelope()'>{{isCreating ? 'Creating...' + counter : 'Create'}}</button>
               </div>
 
               <div class="envelope--input--disclaimer"><p><span>You understand that you are using free software, provided under <a href="https://mit-license.org/" target="_blank">MIT License</a>, at your own risk.</span></p></div>
@@ -489,4 +486,7 @@ export default {
 
 <style scoped>
   .cls-1{fill:#d8d8d8;}.cls-2{fill:#e1e7ec;}.cls-3{fill:#eb423e;}.cls-4{fill:#fbb03b;}.cls-5{fill:#7ac943;}.cls-6{fill:#fff;}.cls-7{fill:none;stroke:#eb423e;stroke-miterlimit:10;stroke-width:5px;}
+  .btn-create {
+    padding: 1rem 10rem;
+  }
 </style>
