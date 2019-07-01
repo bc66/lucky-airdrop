@@ -73,6 +73,18 @@
                 </span>
               </div>
             </div>
+
+            <div class="divider">-- Donate --</div>
+            <div class="envelope-content page-home--faqs">
+              <div class="envelope--field faq">
+                <span>
+                  <p>
+                    If you like my dapp, please consider <a target="_blank" href="https://bmac.vecha.in/donate?name=lucky%20airdrop&addr=0x000000B355fED5A06FeFEE50bF51140E83b076a3&amount=500&msg=If%20you%20like%20my%20dapp,%20please%20consider%20buying%20me%20a%20coffee.%20Thank%20you%20for%20your%20support!"><strong>buying me a coffee</strong></a>. Thank you for your support!
+                  </p>
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

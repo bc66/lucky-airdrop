@@ -242,7 +242,7 @@ contract LuckyAirdrop is Ownable {
     }
 
 	// check and update envelope based on claim
-    function claimEnvelope(uint256 _id, address payable _claimerAddr, bytes memory _signature) public 
+    function claimEnvelope(uint256 _id, address payable _claimerAddr, bytes memory _signature) public
         notEnded(_id)
         requireClaimerNotClaimed(_id, _claimerAddr)
     {

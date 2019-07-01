@@ -1033,7 +1033,7 @@ a {
     font-weight: 500; }
 
 .envelope--content + .envelope--content {
-  padding-top: 3.6rem; }
+  padding-top: 1.6rem; }
 
 .envelope--field {
   text-align: center; }
@@ -1779,7 +1779,7 @@ button.help-icon {
   }
 
 .envelope--content + .envelope--content {
-  padding-top: 3.6rem; }
+  padding-top: 1.6rem; }
 
 .envelope--field {
   text-align: center; }

@@ -78,7 +78,7 @@ import { cry, abi, RLP } from 'thor-devkit'
 const roles = {creator: 'creator', 'claimer': 'claimer'}
 
 export default {
-  name: "Claim",
+  name: 'Claim',
   components: {
     CertModal,
     ShareCard,
