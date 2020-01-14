@@ -4,17 +4,21 @@
       <div class="container-fluid header">
         <div class="row">
           <div class="col-sm-3 col-xs-12 navbar-header header--logo">
-            <h3><router-link :to="{ name: 'home'}">Lucky Airdrop</router-link></h3>
+            <h3><router-link :to="{ name: 'home'}">{{ $t("app_name") }}</router-link></h3>
           </div>
 
           <div class="col-sm-6 hidden-xs header--thor-info">
             <div class="header--thor-info--wrap">
               <div class="header--thor-info--wrap text-center">
-                <div><strong>Your Account: </strong> <span><a :href="accountLink" target="_blank">{{ visitor }}</a></span></div> |
-                <div><strong>Network: </strong>{{ network }}</div>
+                <div><strong>{{ $t("account_label") }}: </strong> <span><a :href="accountLink" target="_blank">{{ visitor }}</a></span></div> |
+                <div><strong>{{ $t("network") }}: </strong>{{ network }}</div>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-3 col-xs-6 navbar-header locale-select">
+              <h5><span><a href="#" @click="setLocale('en-US')">English</a> | <a href="#" @click="setLocale('zh-CN')">简体中文</a></span></h5>
+            </div>
         </div>
       </div>
     </header>
@@ -159,6 +163,10 @@ export default {
     })
   },
   methods: {
+    setLocale(lang) {
+      localStorage.setItem("local", lang)
+      this.$i18n.locale = lang
+    },
     isAddress() {
       return Utils.isAddress(this.address);
     },
@@ -254,3 +262,17 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+
+.locale-select {
+  padding-top: 1em;
+}
+.locale-select h5 {
+  padding: 0;
+}
+.locale-select a {
+  color: #fff;
+}
+</style>

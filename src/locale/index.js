@@ -10,7 +10,8 @@ function localRead(key) {
 }
 
 // 自动根据浏览器系统语言设置语言
-const navLang = navigator.language
+// const navLang = navigator.language
+const navLang = 'zh-CN'
 const localLang = (navLang === 'zh-CN' || navLang === 'en-US') ? navLang : false
 let lang = localLang || localRead('local') || 'zh-CN'
 

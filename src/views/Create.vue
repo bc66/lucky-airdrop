@@ -4,13 +4,13 @@
         <div class="container-fluid header">
           <div class="row">
             <div class="col-sm-3 col-xs-12 navbar-header header--logo">
-              <h3><router-link :to="{ name: 'home'}">Lucky Airdrop</router-link></h3>
+              <h3><router-link :to="{ name: 'home'}">{{ $t("app_name") }}</router-link></h3>
             </div>
 
             <div class="col-sm-6 hidden-xs header--thor-info">
               <div class="header--thor-info--wrap text-center">
-                <div><strong>Account: </strong> <span><a :href="accountLink" target="_blank">{{ account }}</a></span></div> |
-                <div><strong>Balance: </strong>{{ balance }} {{ tokenName }}</div>
+                <div><strong>{{ $t("account") }}: </strong> <span><a :href="accountLink" target="_blank">{{ account }}</a></span></div> |
+                <div><strong>{{ $t("balance") }}: </strong>{{ balance }} {{ tokenName }}</div>
               </div>
             </div>
 
@@ -25,7 +25,7 @@
           <div id='content-area' class='container-fluid create-form'>
 
             <div v-if="hasErr" class="alert envelope-alert">
-              <b>Please correct the following error(s):</b>
+              <b>{{ $t("errors.title") }}</b>
               <ul>
                 <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
               </ul>
@@ -34,7 +34,7 @@
             <!-- Create Form -->
             <div v-if='!created' class='container-fluid envelope-container envelope-container--create'>
               <div class='envelope--title'>
-                <h4>Create Your Red Envelope</h4>
+                <h4>{{ $t("create.title") }}</h4>
               </div>
               <hr>
 
@@ -59,8 +59,8 @@
                   <div class='envelope--input'>
                     <div class='input-group'>
                       <div class='input-addon'>
-                        <label v-if='envelope.envelopeType == 0' for='amount'>Amount Each</label>
-                        <label v-else-if='envelope.envelopeType == 1' for='amount'>Total</label>
+                        <label v-if='envelope.envelopeType == 0' for='amount'>{{ $t("create.amount_each") }}</label>
+                        <label v-else-if='envelope.envelopeType == 1' for='amount'>{{ $t("create.total") }}</label>
                       </div>
                       <input
                         id='amount'
@@ -77,14 +77,14 @@
                     </div>
                   </div>
 
-                  <p v-if='envelope.envelopeType == 0'>Identical Amount.
-                    <a @click='togglePacketType()'>Change to Random Amount</a>
+                  <p v-if='envelope.envelopeType == 0'>{{ $t("create.identical.type") }} 
+                    <a @click='togglePacketType()'>{{ $t("create.identical.change_text") }} </a>
                   </p>
-                  <p v-else-if='envelope.envelopeType == 1'>Random Amount.
-                    <a @click='togglePacketType()'>Change to Identical Amount</a>
+                  <p v-else-if='envelope.envelopeType == 1'>{{ $t("create.random.type") }} 
+                    <a @click='togglePacketType()'>{{ $t("create.random.change_text") }}</a>
                   </p>
 
-                  <div class="envelope--input--disclaimer"><p>0.5% of the total is the tip. No tip for X Node holders.</p></div>
+                  <div class="envelope--input--disclaimer"><p>{{ $t("create.tip_hint") }}</p></div>
                 </div>
               </div>
 
@@ -93,7 +93,7 @@
                   <div class='envelope--input'>
                     <div class='input-group'>
                       <div class='input-addon'>
-                        <label for='quantity'>Quantity</label>
+                        <label for='quantity'>{{ $t("create.quantity") }}</label>
                       </div>
                       <input
                         id='quantity'
@@ -108,7 +108,7 @@
                       >
                     </div>
                   </div>
-                  <p>Enter the number of members between 1 and 100</p>
+                  <p>{{ $t("create.quantity_hint") }}</p>
                 </div>
               </div>
 
@@ -116,7 +116,7 @@
                 <div class='envelope--field'>
                   <div class='envelope--input'>
                     <div class='input-group'>
-                      <textarea placeholder='Best wishes 🐶' v-model='envelope.message'></textarea>
+                      <textarea :placeholder="$t('create.comment_placeholder')" v-model='envelope.message'></textarea>
                     </div>
                   </div>
                 </div>
@@ -124,24 +124,24 @@
                   <div class='envelope--input'>
                     <div class='input-group'>
                       <div class='input-addon'>
-                        <label for='sender'>From: </label>
+                        <label for='sender'>{{ $t("create.from.label") }}: </label>
                       </div>
-                      <input type='text' name='sender' placeholder='Anonymous' v-model='envelope.nickname'>
+                      <input type='text' name='sender' :placeholder="$t('create.from.placeholder')" v-model='envelope.nickname'>
                     </div>
                   </div>
                 </div>
 
                 <div class="envelope--input--disclaimer">
-                  <p>+ {{claimVTHO}} VTHO fee</p>
-                  <p>This is used to pay for the transaction fee when your recipient claims the envelope.</p>
+                  <p>+ {{claimVTHO}} VTHO {{ $t("create.fee") }}</p>
+                  <p>{{ $t("create.fee_hint") }}</p>
                 </div>
               </div>
 
               <div class='envelope--buttons'>
-                <button :disabled="isCreating" class='btn btn-create' @click='createEnvelope()'>{{isCreating ? 'Creating...' + counter : 'Create'}}</button>
+                <button :disabled="isCreating" class='btn btn-create' @click='createEnvelope()'>{{isCreating ? $t("create.create_btn_text") + counter : $t("create.create_btn_text") }}</button>
               </div>
 
-              <div class="envelope--input--disclaimer"><p><span>You understand that you are using free software, provided under <a href="https://mit-license.org/" target="_blank">MIT License</a>, at your own risk.</span></p></div>
+              <div class="envelope--input--disclaimer"><p><span>{{ $t("license") }}</span></p></div>
             </div>
 
             <div v-else>
@@ -296,23 +296,23 @@ export default {
       let envelope = this.envelope
 
       if (!envelope.amount) {
-        this.errors.push('Amount: can not be empty')
+        this.errors.push(this.$t("errors.amount_cannot_be_empty"))
       }
       if (this.calcAmountInEther().gt(1000000)) {
-        this.errors.push('Total: must be less than 100W')
+        this.errors.push(this.$t("errors.total_less_100w"))
       }
       if (envelope.claimers < 0 || envelope.claimers > 100) {
-        this.errors.push('Quantity: must be between 1 and 100')
+        this.errors.push(this.$t("errors.quantity_1_100"))
       }
       if (envelope.message.length > 260) {
-        this.errors.push('Message: must be less than 260 characters')
+        this.errors.push(this.$t("errors.message_less_260"))
       }
       let holdBalance = (new BN(this.balance))
       if (holdBalance.isLessThanOrEqualTo(this.calcAmountInEther())) {
-        this.errors.push('Balance: insufficient balance')
+        this.errors.push(this.$t("errors.balance_insufficient"))
       }
       if (envelope.nickname.length > 64) {
-        this.errors.push('Nickname: must be less than 64 characters')
+        this.errors.push(this.$t("errors.nickname_less_64"))
       }
 
       this.hasErr = this.errors.length > 0

@@ -1,4 +1,5 @@
 export default {
+  app_name: 'Lucky Airdrop',
   home: {
     title: 'Send and receive lucky airdrop',
     works_with: 'Works with',
@@ -21,7 +22,8 @@ export default {
     },
     donate: {
       title: 'Donate',
-      content: 'If you like my dapp, please consider buying me a coffee. Thank you for your support!',
+      content1: 'If you like my dapp, please consider',
+      content2: 'Thank you for your support!'
     }
   },
   identity: {
@@ -57,19 +59,32 @@ export default {
   license: 'You understand that you are using free software, provided under MIT License, at your own risk.',
   claim: {
     hint: 'Click CLAIM to see how much you received.',
-    claim: 'Claim',
-    claiming: 'Claiming',
+    claim_btn_text: 'Claim',
+    claiming_btn_text: 'Claiming...',
     continue: 'Continue',
     total_claims: 'Total claims',
-    no_cliams: 'No claims',
+    max_claims: 'Max Claims',
+    no_cliams: 'No claims!',
     claim_history_title: 'In the past 5 hours',
     input_address: 'Input your address',
     input_hint: 'Please input your wallet address to catch your luck.',
+    claimed_text: 'You’ve already claimed',
   },
   share: {
     title: 'Send this link to your recipients',
     reminder: 'Do not lose it! Once lost this link cannot be recovered.',
-  }
+    copy_btn_text: 'Copy',
+    copied_btn_text: 'Copied',
+  },
+  errors: {
+    title: 'Please correct the following error(s):',
+    amount_cannot_be_empty: 'Amount: can not be empty',
+    total_less_100w: 'Total: must be less than 100W',
+    quantity_1_100: 'Quantity: must be between 1 and 100',
+    message_less_260: 'Message: must be less than 260 characters',
+    balance_insufficient: 'Balance: insufficient balance',
+    nickname_less_64: 'Nickname: must be less than 64 characters',
+  },
 
 
 }

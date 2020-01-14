@@ -6,7 +6,7 @@
         <div class="container-fluid envelope-info">
           <div class="row envelope-info--top">
             <div class="col-xs-5 left-align">
-              <p>Envelope #{{ envelope.id }}</p>
+              <p>{{ $t("envelope") }} #{{ envelope.id }}</p>
             </div>
             <div class="col-xs-7 right-align">
               <p>
@@ -23,19 +23,19 @@
             </svg>
           </div>
           <div class="envelope-info--message">
-            <h2>{{ envelope.message || 'Best wishes 🐶' }}</h2>
-            <p>– {{ envelope.nickname || 'Anonymous' }}</p>
+            <h2>{{ envelope.message || $t("create.comment_placeholder") }}</h2>
+            <p>– {{ envelope.nickname || $t("create.from.placeholder") }}</p>
           </div>
         </div>
 
         <div class="envelope--buttons">
           <div class="envelope--input--disclaimer">
             <p>
-              <span>Click CLAIM to see how much you received.</span>
+              <span>{{ $t("claim.hint") }}</span>
             </p>
           </div>
           <p>
-            <button :disabled="isClaiming"  class="btn btn-env" @click="claim">{{ isClaiming ? 'Claiming...' + counter : 'Claim' }}</button>
+            <button :disabled="isClaiming"  class="btn btn-env" @click="claim">{{ isClaiming ? $t("claim.claiming_btn_text") + counter : $t("claim.claim_btn_text") }}</button>
           </p>
         </div>
 

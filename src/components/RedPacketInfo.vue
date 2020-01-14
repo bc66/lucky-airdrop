@@ -6,7 +6,7 @@
 
     <div class="container-fluid envelope-info">
       <div class="row envelope-info--top">
-        <div class="col-xs-5 left-align">Envelope #{{ envelope.id }}</div>
+        <div class="col-xs-5 left-align">{{ $t("envelope") }} #{{ envelope.id }}</div>
         <div class="col-xs-7 right-align envelop--refund">
           <span v-if="envelope.duration > 0">
             <span v-if="envelope.claimers > envelope.totalClaimers">
@@ -15,7 +15,7 @@
           </span>
           <span v-else>
             <span v-if="envelope.claimers > envelope.totalClaimers"><button class="btn btn-env btn-sm" @click="refund">{{ isRefunding ? 'REFUNDING...' + counter : 'REFUND' }}</button></span>
-            <span v-else>Expired</span>
+            <span v-else>{{ $t("expired") }}</span>
           </span>
         </div>
       </div>
@@ -31,18 +31,18 @@
       </div>
       <div class="envelope-info--claim-details">
         <p>
-          <span>Total claims: {{ envelope.totalClaimers || 0 }}</span>
-          <span>Max claims: {{ envelope.claimers || 0 }}</span>
+          <span>{{ $t("claim.total_claims") }}: {{ envelope.totalClaimers || 0 }}</span>
+          <span>{{ $t("claim.max_claims") }}: {{ envelope.claimers || 0 }}</span>
         </p>
 
       </div>
 
       <div class="envelope-info--message">
-        <h2>{{ envelope.message || 'Best wishes 🐶' }}</h2>
-        <p>– {{ envelope.nickname || 'Anonymous' }}</p>
+        <h2>{{ envelope.message || $t("create.comment_placeholder") }}</h2>
+        <p>– {{ envelope.nickname || $t("create.from.placeholder") }}</p>
       </div>
 
-      <div class="divider"><h4>-- In the past 5 hours --</h4></div>
+      <div class="divider"><h4>-- {{ $t("claim.claim_history_title") }} --</h4></div>
 
       <div class="claim-history" v-if="claimHistories.length">
         <div class="row" v-for="ch in claimHistories" :key="ch._from">
@@ -50,7 +50,7 @@
           <div class="col-xs-4 right-align"><p>{{ch._value}}</p></div>
         </div>
       </div>
-      <div v-else><p>No claims!</p></div>
+      <div v-else><p>{{ $t("claim.no_cliams") }}</p></div>
 
     </div>
   </div>

@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid envelope-container envelope-container--link">
         <div class="container-fluid envelope-link">
-            <h2>Send this link to your recipients</h2>
+            <h2>{{ $t("share.title") }}</h2>
             <div class="envelope--field envelope-link--row">
             <div class="envelope-link--content">
-                <div class="envelope--input--warning"><p>Do not lose it! Once lost this link cannot be recovered.</p></div>
+                <div class="envelope--input--warning"><p>{{ $t("share.reminder") }}</p></div>
 
                 <div class="input-group envelope-link--field">
                     <input type="text" class="print-hide" v-model="shareLink" readonly>
@@ -19,21 +19,28 @@
             </div>
             </div>
         </div>
+
+        <V-share :shareUrl="shareLink" :shareSites="sites"></V-share>
     </div>
 </template>
 
 
 <script>
 import QRCode from 'qrcode'
+import share from 'vue-shares'
 
 export default {
     name: 'ShareCard',
+    components: {
+        'V-share': share
+    },
     props: {
         shareLink: String,
     },
     data() {
         return {
-            copyBtnMsg: 'Copy',
+            copyBtnMsg: this.$t("share.copy_btn_text"),
+            sites: ["qq", "weibo", "wechat", "facebook", "twitter", "google"]
         }
     },
     mounted() {
@@ -47,8 +54,8 @@ export default {
             })
         },
         onCopy() {
-            this.copyBtnMsg = 'Copied'
-            setTimeout(() => { this.copyBtnMsg = 'Copy' }, 2000)
+            this.copyBtnMsg = this.$t("share.copied_btn_text")
+            setTimeout(() => { this.copyBtnMsg = this.$t("share.copy_btn_text") }, 2000)
         }
     }
 }

@@ -6,8 +6,12 @@
       <header class="navbar navbar-default" id="header">
         <div class="container-fluid header">
           <div class="row">
-            <div class="col-sm-3 col-xs-12 navbar-header header--logo">
+            <div class="col-sm-3 col-xs-6 navbar-header header--logo">
               <h3><router-link :to="{ name: 'home'}">Lucky Airdrop</router-link></h3>
+            </div>
+
+            <div class="col-sm-offset-6 col-sm-3 col-xs-6 navbar-header locale-select">
+              <h5><span><a href="#" @click="setLocale('en-US')">English</a> | <a href="#" @click="setLocale('zh-CN')">简体中文</a></span></h5>
             </div>
           </div>
         </div>
@@ -36,15 +40,15 @@
             </svg>
               <h2>
                 <div>
-                  <h1>Send and receive lucky airdrop.</h1>
+                  <h1>{{ $t("home.title") }}</h1>
                 </div>
               </h2>
               <div class="envelope-field">
-                <router-link class="btn btn-create" :to="{ name: 'create'}">{{ $t("envelope.create.title") }}</router-link>
+                <router-link class="btn btn-create" :to="{ name: 'create'}">{{ $t("home.create_btn") }}</router-link>
               </div>
             </div>
 
-            <div class="divider">-- Works with --</div>
+            <div class="divider">-- {{ $t("home.works_with") }} --</div>
 
             <div class="works-with-logos">
               <a href="https://env.vechain.org/r/#sync" target="_blank">
@@ -55,31 +59,29 @@
               </a>
             </div>
 
-            <div class="divider">-- FAQ --</div>
+            <div class="divider">-- {{ $t("home.faq.title") }} --</div>
             <div class="envelope-content page-home--faqs">
               <div class="envelope--field faq">
-                <h3>How does Lucky Airdrop work?</h3>
+                <h3>{{ $t("home.faq.how_does_work") }}</h3>
                 <span>
                   <p>
-                    <strong>Create and send an envelope:</strong> Go to
-                    <router-link :to="{ name: 'create'}">Create</router-link> to create an envelope. Once the envelope is created, send the URL or QRCode to everyone you want to gift.
+                    <strong>{{ $t("home.faq.principle1.title") }}:</strong> {{ $t("home.faq.principle1.content") }}
                   </p>
                   <p>
-                    <strong>Claim an envelope:</strong> Go to the URL you received (don't have to install any plugins to open). Click on CLAIM to reveal the amount and claim.
+                    <strong>{{ $t("home.faq.principle2.title") }}:</strong> {{ $t("home.faq.principle2.content") }}
                   </p>
                   <p>
-                    <strong>Refund an envelope:</strong> Once your envelope has expired, you can refund the unclaimed amount back into your account. Go to the URL and click on REFUND.
+                    <strong>{{ $t("home.faq.principle3.title") }}:</strong> {{ $t("home.faq.principle3.content") }}
                   </p>
                 </span>
               </div>
             </div>
 
-            <div class="divider">-- Donate --</div>
+            <div class="divider">-- {{ $t("home.donate.title") }} --</div>
             <div class="envelope-content page-home--faqs">
               <div class="envelope--field faq">
                 <span>
-                  <p>
-                    If you like my dapp, please consider <a target="_blank" href="https://bmac.vecha.in/donate?name=lucky%20airdrop&addr=0x000000B355fED5A06FeFEE50bF51140E83b076a3&amount=500&msg=If%20you%20like%20my%20dapp,%20please%20consider%20buying%20me%20a%20coffee.%20Thank%20you%20for%20your%20support!"><strong>buying me a coffee</strong></a>. Thank you for your support!
+                  <p> {{ $t("home.donate.content1") }} <a target="_blank" href="https://bmac.vecha.in/donate?name=lucky%20airdrop&addr=0x000000B355fED5A06FeFEE50bF51140E83b076a3&amount=500&msg=If%20you%20like%20my%20dapp,%20please%20consider%20buying%20me%20a%20coffee.%20Thank%20you%20for%20your%20support!"><strong>buy me a coffee</strong></a> {{ $t("home.donate.content2") }} 
                   </p>
                 </span>
               </div>
@@ -111,6 +113,12 @@ export default {
       loading: false
     }
   },
+  methods: {
+    setLocale(lang) {
+      localStorage.setItem("local", lang)
+      this.$i18n.locale = lang
+    }
+  }
 };
 </script>
 
@@ -155,5 +163,15 @@ export default {
   .container-envelope h3 {
     display: none;
   }
+}
+
+.locale-select {
+  padding-top: 1em;
+}
+.locale-select h5 {
+  padding: 0;
+}
+.locale-select a {
+  color: #fff;
 }
 </style>

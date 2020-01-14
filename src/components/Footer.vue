@@ -1,6 +1,6 @@
 <template>
     <footer id="footer">
-        <div class="left-align footer--copyright"><p>© 2019 Lucky Airdrop</p></div>
+        <div class="left-align footer--copyright"><p>© 2020 {{ $t("app_name") }}</p></div>
         
         <div class="container-social right-align right-align">
             <ul class="list-unstyled">

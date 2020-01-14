@@ -1,8 +1,8 @@
 <template>
     <div id="app-placeholder">
-      <h1>Lucky Airdrop</h1>
-      <h4>Send decentralized fortune</h4>
-      <p>Loading dapp…</p>
+      <h1>{{ $t("app_name") }}</h1>
+      <h4>{{ $t("loading.title") }}</h4>
+      <p>{{ $t("loading.content") }}…</p>
     </div>
 </template>
 

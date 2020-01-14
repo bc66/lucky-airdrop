@@ -1,18 +1,18 @@
 <template>
   <div class="container-fluid envelope-wrap">
     <div class="envelope-wrap--title">
-      <h2>You’ve already claimed {{ envelope.claimed }} {{ tokenName }}.</h2>
+      <h2>{{ $t("claim.claimed_text") }} {{ envelope.claimed }} {{ tokenName }}.</h2>
     </div>
     <div class="container-fluid envelope-container envelope-container--claim">
       <div class="container-fluid envelope-info">
         <div class="row envelope-info--top">
-          <div class="col-xs-5 left-align">Envelope #{{ envelope.id }}</div>
+          <div class="col-xs-5 left-align">{{ $t("envelope") }} #{{ envelope.id }}</div>
           <div class="col-xs-7 right-align">
             <span v-if="envelope.duration > 0">
               Expires
               <time datetime="2019-03-04T15:58:09.000Z" title="2019-03-04 15:58">in {{ envelope.duration * 1000 | duration('humanize') }}</time>
             </span>
-            <span v-else>Expired</span>
+            <span v-else>{{ $t("expired") }}</span>
           </div>
         </div>
         <div>
@@ -26,12 +26,12 @@
         </div>
         <div class="envelope-info--claim-details">
           <p>
-            <span>Total claims: {{ envelope.totalClaimers || 0 }}</span>
+            <span>{{ $t("claim.total_claims") }}: {{ envelope.totalClaimers || 0 }}</span>
           </p>
         </div>
         <div class="envelope-info--message">
-          <h2>{{ envelope.message || 'Best wishes 🐶' }}</h2>
-          <p>– {{ envelope.nickname || 'Anonymous' }}</p>
+          <h2>{{ envelope.message || $t("create.comment_placeholder") }}</h2>
+          <p>– {{ envelope.nickname || $t("create.from.placeholder") }}</p>
         </div>
       </div>
     </div>
