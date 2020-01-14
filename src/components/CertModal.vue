@@ -10,7 +10,7 @@
             <h4>
                 <span>Please confirm that you would like this site to access your account.</span>
                 <br><br>
-                    You will receive a identification request pop-up in your sync/comet.
+                <span>You will receive a identification request pop-up in your sync/comet.</span>
             </h4>
             <div class="envelope--modal--details"><p></p></div>
         </div>

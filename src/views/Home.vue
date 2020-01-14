@@ -40,7 +40,7 @@
                 </div>
               </h2>
               <div class="envelope-field">
-                <router-link class="btn btn-create" :to="{ name: 'create'}">Create an Red Envelope</router-link>
+                <router-link class="btn btn-create" :to="{ name: 'create'}">{{ $t("envelope.create.title") }}</router-link>
               </div>
             </div>
 
