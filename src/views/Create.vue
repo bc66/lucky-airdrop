@@ -138,7 +138,7 @@
               </div>
 
               <div class='envelope--buttons'>
-                <button :disabled="isCreating" class='btn btn-create' @click='createEnvelope()'>{{isCreating ? $t("create.create_btn_text") + counter : $t("create.create_btn_text") }}</button>
+                <button :disabled="isCreating" class='btn btn-create' @click='createEnvelope()'>{{isCreating ? $t("create.creating_btn_text") + counter : $t("create.create_btn_text") }}</button>
               </div>
 
               <div class="envelope--input--disclaimer"><p><span>{{ $t("license") }}</span></p></div>

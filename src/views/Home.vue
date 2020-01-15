@@ -7,7 +7,7 @@
         <div class="container-fluid header">
           <div class="row">
             <div class="col-sm-3 col-xs-6 navbar-header header--logo">
-              <h3><router-link :to="{ name: 'home'}">Lucky Airdrop</router-link></h3>
+              <h3><router-link :to="{ name: 'home'}">{{ $t("app_name") }}</router-link></h3>
             </div>
 
             <div class="col-sm-offset-6 col-sm-3 col-xs-6 navbar-header locale-select">

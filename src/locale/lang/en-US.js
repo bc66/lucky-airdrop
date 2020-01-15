@@ -54,7 +54,8 @@ export default {
     from: {label: 'From', placeholder: 'Anonymous'},
     fee: 'fee',
     fee_hint: 'This is used to pay for the transaction fee when your recipient claims the envelope.',
-    btn_text: 'Create',
+    create_btn_text: 'Create',
+    creating_btn_text: 'Creating...'
   },
   license: 'You understand that you are using free software, provided under MIT License, at your own risk.',
   claim: {
