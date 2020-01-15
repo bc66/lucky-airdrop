@@ -197,10 +197,10 @@ a {
   100% {
     transform: rotate(0deg); } }
 
-.svg--icon-dog {
+.svg--icon-mouse {
   display: inline-block;
   width: auto; }
-  .animated > .svg--icon-dog, .svg--icon-dog:hover {
+  .animated > .svg--icon-mouse, .svg--icon-mouse:hover {
     transform-origin: 39% 81%;
     animation: 1.8s linear 0.5s infinite bobblehead; }
 
@@ -1149,7 +1149,7 @@ a {
   align-items: center; }
   .envelope-container--pending-verification .envelope--content {
     flex: 1; }
-    .envelope-container--pending-verification .envelope--content .svg--icon-dog {
+    .envelope-container--pending-verification .envelope--content .svg--icon-mouse {
       height: 9.6rem; }
 
 @media (max-width: 768px) {
@@ -1228,9 +1228,9 @@ a {
 .envelope-info {
   text-align: center;
   /** RED */ }
-  .envelope-info svg.svg--icon-dog {
+  .envelope-info svg.svg--icon-mouse {
     width: 6em; }
-    .envelope-info svg.svg--icon-dog circle, .envelope-info svg.svg--icon-dog path, .envelope-info svg.svg--icon-dog polygon {
+    .envelope-info svg.svg--icon-mouse circle, .envelope-info svg.svg--icon-mouse path, .envelope-info svg.svg--icon-mouse polygon {
       fill: #242424; }
   .envelope-info .envelope-info--top {
     margin: 0 -1.5rem;
@@ -1306,10 +1306,10 @@ a {
     color: white; }
     .envelope-container--red .envelope-info svg path, .envelope-container--red .envelope-info svg polygon {
       fill: #242424; }
-    .envelope-container--red .envelope-info svg.svg--icon-dog circle, .envelope-container--red .envelope-info svg.svg--icon-dog path, .envelope-container--red .envelope-info svg.svg--icon-dog polygon {
+    .envelope-container--red .envelope-info svg.svg--icon-mouse circle, .envelope-container--red .envelope-info svg.svg--icon-mouse path, .envelope-container--red .envelope-info svg.svg--icon-mouse polygon {
       fill: white; }
       @media print {
-        .envelope-container--red .envelope-info svg.svg--icon-dog circle, .envelope-container--red .envelope-info svg.svg--icon-dog path, .envelope-container--red .envelope-info svg.svg--icon-dog polygon {
+        .envelope-container--red .envelope-info svg.svg--icon-mouse circle, .envelope-container--red .envelope-info svg.svg--icon-mouse path, .envelope-container--red .envelope-info svg.svg--icon-mouse polygon {
           fill: #242424; } }
     .envelope-container--red .envelope-info .envelope-info--expires p {
       color: white;
@@ -1915,7 +1915,7 @@ button.help-icon {
   align-items: center; }
   .envelope-container--pending-verification .envelope--content {
     flex: 1; }
-    .envelope-container--pending-verification .envelope--content .svg--icon-dog {
+    .envelope-container--pending-verification .envelope--content .svg--icon-mouse {
       height: 9.6rem; }
 
 @media (max-width: 768px) {
