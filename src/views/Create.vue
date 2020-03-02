@@ -48,6 +48,7 @@
                         <option value='OCE'>OCE</option>
                         <option value='PLA'>PLA</option>
                         <option value='TIC'>TIC</option>
+                        <option value='SNK'>SNK</option>
                       </select>
                     </div>
                   </div>
